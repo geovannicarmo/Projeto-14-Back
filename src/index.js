@@ -25,14 +25,15 @@ app.post('/teste', (req,res)=>{
 
     let body=req.body
 
-    db.collection('testes').insertOne({
+    db.collection('testes2').insertOne({
         
-        teste: 1
-    })
+        body
+    }).then(()=>res.send("criado"))
 
-    db.collection('testes').find().toArray().then((testes)=>console.log(testes))
+})
 
-    res.sendStatus(201)
+app.get('/', (req,res)=>{
+    res.send("get")
 })
 
 
