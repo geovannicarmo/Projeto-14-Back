@@ -1,0 +1,11 @@
+{
+  "name": "projeto14-sportcenter-back",
+  "version": "1.0.0",
+  "description": "e-commerce de equipamentos esportivos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Geovanni Carmo e Danton Matheus",
+  "license": "ISC"
+}
