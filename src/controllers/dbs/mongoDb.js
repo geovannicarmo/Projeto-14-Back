@@ -1,5 +1,7 @@
 import { MongoClient } from 'mongodb'
 import dotenv from 'dotenv';
+import { ObjectId } from "mongodb";
+
 
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI
@@ -12,4 +14,6 @@ mongoClient.connect().then(() => {
 	db = mongoClient.db("DBsportcenter");
 });
 
-export {db}
+const objectId = ObjectId
+
+export {db, objectId}

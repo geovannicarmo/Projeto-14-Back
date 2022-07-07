@@ -4,6 +4,8 @@ import cors from "cors"
 import chalk from "chalk"
 import routeAuthentication from './routes/routeAuthentication.js'
 
+import userMiddleware from './middleware/userMiddleware.js'
+
 dotenv.config();
 const app = express()
 
@@ -15,6 +17,17 @@ const MONGO_URI = process.env.MONGO_URI
 
 app.use(routeAuthentication)
 
+
+app.get('/',  userMiddleware, (req, res)=>{
+
+    const user  = res.locals.idUser;
+    console.log(user);
+
+    res.send("foi")
+
+    })
+    
+    
 
 app.listen(PORT,()=>console.log(chalk.yellow(`Server run in port ${PORT}`)))
 

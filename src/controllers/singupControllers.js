@@ -71,24 +71,38 @@ export async function postLogin(req, res){
         {
             return res.status(422).send("E-mail ou senha invalidos")
         }
+
+
+
+        const thereIsSession = await db.collection("session").findOne({
+            idUser: User._id
+        })
+
+        if(thereIsSession){
+            console.log(thereIsSession)
+
+            return res.status(422).send("Usuario logado")
+        }
+        
+
+       const session = await db.collection('session').insertOne({
+             idUser: User._id
+             
+        })
+
+        const sessionId = session.insertedId.toHexString()
+        // console.log(session.insertedId)
         
         
         const SECRETKEY = process.env.SECRETKEY
         
-        
-        const dadosJWT = "dados a sif encriptar"
+        const dadosJWT = sessionId
+
+        // console.log(dadosJWT)
         
         const token = jwt.sign(dadosJWT, SECRETKEY);
-
-        console.log(User._id)
-
-        db.collection('session').insertOne({
-             idUser: User._id
-        })
-
         
-        
-
+ 
         return res.status(201).send(token)
         
     }catch(error){
