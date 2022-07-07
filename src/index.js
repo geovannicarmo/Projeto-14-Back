@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors"
 import chalk from "chalk"
 import routeAuthentication from './routes/routeAuthentication.js'
-import routeProducts from "./routes/reouteProducts.js";
+import routeProducts from "./routes/routeProducts.js";
 
 dotenv.config();
 const app = express()
