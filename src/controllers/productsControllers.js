@@ -13,10 +13,18 @@ import { db } from "./dbs/mongoDb.js";
   }
 } */
 
-export async function getProducts(_, res) {
+export async function getProducts(req, res) {
   try {
-    const products = await db.collection('products').find().toArray();
+    const skip = req.headers.value*12
+
+    const products = await db.collection('products').find().sort().skip(skip).limit(0).toArray();
+
+    if(products.length===0){
+      return res.status(200).send("Todos os produtos foram carregados")
+    }
+
     return res.status(200).send(products)
+
   }
   catch (error) {
     console.log(error)
