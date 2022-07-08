@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 export async function postSingup(req, res){
+
     try{
 
         const user= req.body;
@@ -25,10 +26,8 @@ export async function postSingup(req, res){
             return res.status(422).send("Esse e-mail já está registrado")
         }
 
-
         const passwordCrypt = bcrypt.hashSync(user.password, 10)
-
-        
+ 
         await db.collection('users').insertOne({  
             name: user.name,
             email: user.email,
@@ -38,19 +37,14 @@ export async function postSingup(req, res){
             
         }
         catch (error){
-            console.log(error)
-            console.log("____________________________________________________________")
             return res.status(422).send("Erro ao cadastrar o usuário")
-
         }
 
 }
 
 export async function postLogin(req, res){
 
-    try{
-
-        
+    try{  
         const dataLogin = req.body
         
         const validate = SchemaLogin.validate(dataLogin)
@@ -71,42 +65,22 @@ export async function postLogin(req, res){
         {
             return res.status(422).send("E-mail ou senha invalidos")
         }
-
-
-
-        const thereIsSession = await db.collection("session").findOne({
+        const thereIsSession = await db.collection("session").deleteOne({
             idUser: User._id
         })
-
-        if(thereIsSession){
-            console.log(thereIsSession)
-
-            return res.status(422).send("Usuario logado")
-        }
-        
 
        const session = await db.collection('session').insertOne({
              idUser: User._id
              
         })
-
         const sessionId = session.insertedId.toHexString()
-        // console.log(session.insertedId)
-        
-        
-        const SECRETKEY = process.env.SECRETKEY
-        
+        const SECRETKEY = process.env.SECRETKEY   
         const dadosJWT = sessionId
-
-        // console.log(dadosJWT)
-        
         const token = jwt.sign(dadosJWT, SECRETKEY);
         
- 
         return res.status(201).send(token)
         
     }catch(error){
-        console.log(error)
         return res.status(422).send("Erro ao efetuar o login do usuário")
     }
-    } 
+} 
