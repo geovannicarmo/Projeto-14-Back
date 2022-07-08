@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors"
 import chalk from "chalk"
 import routeAuthentication from './routes/routeAuthentication.js'
+import routeProducts from "./routes/routeProducts.js";
 
 import userMiddleware from './middleware/userMiddleware.js'
 
@@ -13,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT
-const MONGO_URI = process.env.MONGO_URI
 
-app.use(routeAuthentication)
+app.use(routeAuthentication);
+app.use(routeProducts);
 
 
 app.get('/',  userMiddleware, (req, res)=>{
