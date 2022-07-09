@@ -14,6 +14,6 @@ mongoClient.connect().then(() => {
 	db = mongoClient.db("DBsportcenter");
 });
 
-const objectId = ObjectId
+const objectId = ObjectId;
 
 export {db, objectId}
