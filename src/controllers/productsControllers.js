@@ -37,7 +37,7 @@ export async function getProduct(req, res) {
   const { productId } = req.params;
   try {
     const product = await db.collection('products').find({_id: new objectId(productId)}).toArray();
-    return res.status(200).send(product);
+    return res.status(200).send(product[0]);
   }
   catch (error) {
     console.log(error)
