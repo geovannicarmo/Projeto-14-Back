@@ -50,7 +50,8 @@ export async function postLogin(req, res){
         const validate = SchemaLogin.validate(dataLogin)
         
         if(validate.error){
-            res.status(422).send(validate.error.details[0].message);
+            console.log(validate)
+           return res.status(422).send(validate.error.details[0].message);
          }
 
         const User = await db.collection("users").findOne({
