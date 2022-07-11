@@ -77,11 +77,13 @@ export async function postLogin(req, res){
         const sessionId = session.insertedId.toHexString()
         const SECRETKEY = process.env.SECRETKEY   
         const dadosJWT = sessionId
+        const configuracoes = { expiresIn: 60*60*24 }
         const token = jwt.sign(dadosJWT, SECRETKEY);
         
         return res.status(201).send(token)
         
     }catch(error){
+        console.log(error)
         return res.status(422).send("Erro ao efetuar o login do usuário")
     }
 } 

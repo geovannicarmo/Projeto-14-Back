@@ -46,12 +46,14 @@ try{
             valorEntregaNormal : response[1].Valor
            }
 
+           console.log("varrega")
+
            return res.status(200).send(PrazosValores)
 
         
       });
 
 }catch(error){
-    return res.status(422).send("Erro ao efetuar o login do usuário")
+    return res.status(422).send("Erro ao efetuar o cadastro do endereço do usuário")
 }
 }
