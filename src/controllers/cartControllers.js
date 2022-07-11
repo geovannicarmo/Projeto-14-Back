@@ -38,11 +38,13 @@ export async function addToCart(req, res) {
 }
 
 export async function deleteFromCart(req, res) {
+  const { idUser } = res.locals;
   const {productId} = req.params;
 
   try {
-    await db.collection('cartsProducts').deleteOne(productId);
-    return res.status(201).send("Removido com sucesso!");
+    await db.collection('cartsProducts').deleteOne({_id: new objectId(productId)});
+    const cartUpdated = await db.collection('cartsProducts').find({idUser: new objectId(idUser)}).toArray();
+    return res.status(200).send(cartUpdated);
   }
 
   catch (error) {
