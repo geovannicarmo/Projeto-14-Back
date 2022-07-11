@@ -47,7 +47,7 @@ export async function postLogin(req, res){
     try{  
         const dataLogin = req.body
         
-        const validate = SchemaLogin.validate(dataLogin)
+        const validate = SchemaLogin.validate(dataLogin);
         
         if(validate.error){
             console.log(validate)
@@ -82,6 +82,7 @@ export async function postLogin(req, res){
         return res.status(201).send(token)
         
     }catch(error){
-        return res.status(422).send("Erro ao efetuar o login do usuário")
+        console.log(error);
+        return res.status(500).send("Erro ao efetuar o login do usuário")
     }
 } 
