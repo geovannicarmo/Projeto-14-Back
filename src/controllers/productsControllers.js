@@ -29,7 +29,7 @@ export async function getProducts(req, res) {
   catch (error) {
     console.log(error)
     console.log("____________________________________________________________")
-    return res.status(422).send("Erro ao listar os produtos")
+    return res.status(500).send("Erro ao listar os produtos")
   }
 }
 
@@ -41,7 +41,7 @@ export async function getProduct(req, res) {
   }
   catch (error) {
     console.log(error)
-    console.log("____________________________________________________________")
-    return res.status(422).send("Erro ao procurar o produto selecionado")
+    console.log("____________________________________________________________");
+    return res.status(500).send("Erro ao procurar o produto selecionado");
   }
 }

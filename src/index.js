@@ -6,6 +6,7 @@ import routeAuthentication from './routes/routeAuthentication.js'
 import routeProducts from "./routes/routeProducts.js";
 import routevalidaEndereco from "./routes/routevalidateAddress.js"
 import routepurchase from "./routes/routePurchase.js"
+import routeCart from "./routes/routeCart.js"
 
 
 
@@ -19,8 +20,9 @@ const PORT = process.env.PORT
 
 app.use(routeAuthentication);
 app.use(routeProducts);
-app.use(routevalidaEndereco)
-app.use(routepurchase)
+app.use(routevalidaEndereco);
+app.use(routepurchase);
+app.use(routeCart);
 
 
 
