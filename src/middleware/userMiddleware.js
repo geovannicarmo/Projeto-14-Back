@@ -5,11 +5,8 @@ import jwt from 'jsonwebtoken';
 export default async function userMiddleware(req, res, next){
 
     const { authorization } = req.headers;
-    console.log("authorization")
-    console.log(authorization)
+
     const token = authorization?.replace('Bearer ', '').trim();
-    console.log("token")
-    console.log(token)
 
 
     if (!token) return res.status(401).send('Token invalido ou expirado(n recebido).');
