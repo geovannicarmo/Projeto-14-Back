@@ -1,4 +1,4 @@
-import { db } from "./dbs/mongoDb.js";
+import { db, objectId } from "./dbs/mongoDb.js";
 
 /* export async function insertProduct(req, res) {
   try {
@@ -30,5 +30,18 @@ export async function getProducts(req, res) {
     console.log(error)
     console.log("____________________________________________________________")
     return res.status(422).send("Erro ao listar os produtos")
+  }
+}
+
+export async function getProduct(req, res) {
+  const { productId } = req.params;
+  try {
+    const product = await db.collection('products').find({_id: new objectId(productId)}).toArray();
+    return res.status(200).send(product[0]);
+  }
+  catch (error) {
+    console.log(error)
+    console.log("____________________________________________________________")
+    return res.status(422).send("Erro ao procurar o produto selecionado")
   }
 }
